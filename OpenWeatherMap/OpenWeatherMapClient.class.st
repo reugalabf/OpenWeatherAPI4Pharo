@@ -1,3 +1,20 @@
+"
+|client|
+client :=  OpenWeatherMapClient withSettings: ((Dictionary new) at:#key put:'f6cad1cf37f76e54361445deed031fda'; yourself).
+client oneCallFor: ((Dictionary new) 
+							at:#lat put: '-33.995386'; 
+							at:#lon put:'-58.286154'; 
+							at:#units put: 'metric';
+							at:#exclude put:'minutely,hourly';
+							yourself  ).
+							
+(client currentWeatherFor: ((Dictionary new) 
+							at:#lat put: '-33.995386'; 
+							at:#lon put:'-58.286154'; 
+							at:#units put: 'metric';
+							at:#exclude put:'minutely,hourly';
+							yourself  )).							
+"
 Class {
 	#name : #OpenWeatherMapClient,
 	#superclass : #Object,
@@ -38,7 +55,7 @@ OpenWeatherMapClient >> buildCallURL: urlString with: paramsDict [
 	ws nextPutAll: urlString.
 	ws nextPut: $?.
 	self urlParametersOn: ws with: paramsDict.
-	ws contents
+	^ws contents
 ]
 
 { #category : #private }
@@ -57,7 +74,10 @@ OpenWeatherMapClient >> currentWeatherCallWith: paramsDict [
 { #category : #api }
 OpenWeatherMapClient >> currentWeatherFor: paramsDict [
 
-	^ ZnEasy get: (self currentWeatherCallWith: paramsDict)
+	| rsp |
+	rsp := ZnEasy get: (self currentWeatherCallWith: paramsDict).
+	rsp isError ifTrue: [ ^ self error: 'Error fetching Current Weather' ].
+	^(NeoJSONReader on: rsp entity readStream) nextAs: CurrentWeather
 ]
 
 { #category : #initialization }
@@ -71,7 +91,11 @@ OpenWeatherMapClient >> initializeSettings: aDictionary [
 { #category : #api }
 OpenWeatherMapClient >> oneCallFor: paramsDict [
 
-	^ ZnEasy get: (self oneCallWith: paramsDict)
+	| rsp |
+	rsp := ZnEasy get: (self oneCallWith: paramsDict).
+	rsp isError ifTrue: [ 
+		^ self error: 'Error fetching One Call Weather Report' ].
+	^ (NeoJSONReader on: rsp entity readStream) nextAs: OneCallReport
 ]
 
 { #category : #private }
@@ -98,5 +122,6 @@ OpenWeatherMapClient >> urlParametersOn: ws with: paramsDict [
 			nextPut: $&;
 			nextPutAll: k;
 			nextPut: $=;
-			nextPutAll: v ]
+			nextPutAll: v ].
+	^ ws contents
 ]
