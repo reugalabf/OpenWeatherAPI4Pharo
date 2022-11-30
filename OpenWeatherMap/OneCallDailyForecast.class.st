@@ -1,6 +1,8 @@
 Class {
 	#name : #OneCallDailyForecast,
 	#superclass : #Object,
+	#traits : 'DataTimeConversor',
+	#classTraits : 'DataTimeConversor classTrait',
 	#instVars : [
 		'dt',
 		'sunrise',
@@ -30,4 +32,10 @@ Class {
 OneCallDailyForecast class >> neoJsonMapping: mapper [
 
 	mapper for: self do: [ :mapping | mapping mapAllInstVars ]
+]
+
+{ #category : #accessing }
+OneCallDailyForecast >> dt [
+
+	^ dt
 ]
