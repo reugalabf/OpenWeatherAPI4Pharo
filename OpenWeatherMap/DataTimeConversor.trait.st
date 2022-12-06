@@ -1,6 +1,6 @@
 Trait {
 	#name : #DataTimeConversor,
-	#category : #OpenWeatherMap
+	#category : #'OpenWeatherMap-Client'
 }
 
 { #category : #enumerating }
