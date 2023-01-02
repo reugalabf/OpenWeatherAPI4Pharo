@@ -1,6 +1,6 @@
 "
 |client|
-client :=  OpenWeatherMapClient withSettings: ((Dictionary new) at:#key put:'f6cad1cf37f76e54361445deed031fda'; yourself).
+client :=  OpenWeatherMapClient withSettings: ((Dictionary new) at:#key put:'YOUR-KEY'; yourself).
 client oneCallFor: ((Dictionary new) 
 							at:#lat put: '-33.995386'; 
 							at:#lon put:'-58.286154'; 
