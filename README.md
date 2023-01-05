@@ -2,9 +2,9 @@
 ---
 This is a client for the some of the API published by OpenWeatherMap such as:OneCall and currentWeather.
 
-Please visit https://openweathermap.org/ to learn more about the available APIs and to get a valid key. The key is required to call the API and it is required by the OpenWeatherMapClient.
+Please visit https://openweathermap.org/ to learn more about the available APIs and to get a valid key. The key is required to call the API. 
 
-Example
+## Example
 
 ``` |client|
 client :=  OpenWeatherMapClient withSettings: ((Dictionary new) at:#key put:'---your-key---'; yourself).
