@@ -73,3 +73,51 @@ HistoryBulk class >> neoJsonMapping: mapper [
 
 	mapper for: self do: [ :mapping | mapping mapAllInstVars ]
 ]
+
+{ #category : #accessing }
+HistoryBulk >> dt [
+
+	^ dt
+]
+
+{ #category : #accessing }
+HistoryBulk >> dt_iso [
+
+	^ dt_iso
+]
+
+{ #category : #accessing }
+HistoryBulk >> rain [
+
+	^ rain
+]
+
+{ #category : #accessing }
+HistoryBulk >> rain1h [
+
+	^ rain ifNil: [ 0 ] ifNotNil: [ :obj| obj at:'1h' ] 
+]
+
+{ #category : #accessing }
+HistoryBulk >> snow [
+
+	^ snow
+]
+
+{ #category : #accessing }
+HistoryBulk >> snow1h [
+
+	^ snow ifNil: [ 0 ] ifNotNil: [ :obj | obj at: '1h' ]
+]
+
+{ #category : #accessing }
+HistoryBulk >> temperature [
+
+	^ main at: #temp
+]
+
+{ #category : #accessing }
+HistoryBulk >> weatherDescription [
+
+	^ (weather at: 1) at: #description
+]

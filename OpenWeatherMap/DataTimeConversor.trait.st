@@ -4,7 +4,13 @@ Trait {
 }
 
 { #category : #enumerating }
-DataTimeConversor >> dateAndTimes [
+DataTimeConversor >> date [
 
-	^ DateAndTime fromUnixTime: self dt
+	^ (DateAndTime fromUnixTime: self dt) asDate
+]
+
+{ #category : #enumerating }
+DataTimeConversor >> dateAndTime [
+
+	^ DateAndTime fromString: self dt_iso " fromUnixTime: self dt"
 ]
