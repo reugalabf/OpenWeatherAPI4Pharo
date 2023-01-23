@@ -26,11 +26,11 @@ BaselineOfOpenWeatherMap >> neoBaselines: spec [
 
 	spec
 		baseline: 'NeoJSON'
-		with: [ spec loads: 'github://svenvc/NeoJSON/repository' ].
+		with: [ spec repository: 'github://svenvc/NeoJSON/repository' ].
 
 	spec
 		baseline: 'NeoCSV'
-		with: [ spec loads: 'github://svenvc/NeoCSV/repository' ]
+		with: [ spec repository: 'github://svenvc/NeoCSV/repository' ]
 ]
 
 { #category : #accessing }
