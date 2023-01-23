@@ -1,11 +1,11 @@
 Class {
-	#name : #BaselineOfOpenWeanterMap,
+	#name : #BaselineOfOpenWeatherMap,
 	#superclass : #BaselineOf,
 	#category : #BaselineOfOpenWeatherMap
 }
 
 { #category : #baselines }
-BaselineOfOpenWeanterMap >> baseline: spec [
+BaselineOfOpenWeatherMap >> baseline: spec [
 
 	<baseline>
 	spec for: #common do: [ 
@@ -22,7 +22,7 @@ BaselineOfOpenWeanterMap >> baseline: spec [
 ]
 
 { #category : #baselines }
-BaselineOfOpenWeanterMap >> neoBaselines: spec [
+BaselineOfOpenWeatherMap >> neoBaselines: spec [
 
 	spec
 		baseline: 'NeoJSON'
@@ -34,6 +34,6 @@ BaselineOfOpenWeanterMap >> neoBaselines: spec [
 ]
 
 { #category : #accessing }
-BaselineOfOpenWeanterMap >> projectClass [
+BaselineOfOpenWeatherMap >> projectClass [
 	^ 	MetacelloCypressBaselineProject
 ]
