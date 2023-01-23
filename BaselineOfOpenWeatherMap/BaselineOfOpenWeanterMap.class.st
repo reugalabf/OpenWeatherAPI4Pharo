@@ -10,8 +10,11 @@ BaselineOfOpenWeanterMap >> baseline: spec [
 	<baseline>
 	spec for: #common do: [ 
 		spec
-			package: #OpenWeatherMap
-			with: [ spec requires: #( 'NeoJSON' #NeoCSV ) ];
+			package: #OpenWeatherMap with: [ 
+				spec
+					repository: 'https://github.com/svenvc/NeoJSON.git';
+					repository: 'https://github.com/svenvc/NeoCSV.git';
+					yourself ];
 			package: #'OpenWeatherMap-Tests'
 			with: [ spec requires: #( 'OpenWeatherMap' ) ].
 		spec
