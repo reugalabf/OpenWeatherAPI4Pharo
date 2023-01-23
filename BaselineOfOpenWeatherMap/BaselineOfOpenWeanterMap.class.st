@@ -18,3 +18,8 @@ BaselineOfOpenWeanterMap >> baseline: spec [
 			group: 'default'
 			with: #( 'OpenWeatherMap' 'OpenWeatherMap-Tests' ) ]
 ]
+
+{ #category : #accessing }
+BaselineOfOpenWeanterMap >> projectClass [
+	^ 	MetacelloCypressBaselineProject
+]
