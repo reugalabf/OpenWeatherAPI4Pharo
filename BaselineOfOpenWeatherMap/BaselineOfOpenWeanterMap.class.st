@@ -1,7 +1,7 @@
 Class {
 	#name : #BaselineOfOpenWeanterMap,
 	#superclass : #BaselineOf,
-	#category : #'OpenWeatherMap-Manifest'
+	#category : #BaselineOfOpenWeatherMap
 }
 
 { #category : #baselines }
