@@ -17,7 +17,7 @@ BaselineOfOpenWeatherMap >> baseline: spec [
 			with: [ spec requires: #( 'OpenWeatherMap' ) ].
 		spec
 			group: 'Core' with: #( 'OpenWeatherMap' );
-			group: 'Tests	' with: #( 'OpenWeatherMap-Tests' );
+			group: 'Tests' with: #( 'OpenWeatherMap-Tests' );
 			group: 'default' with: #( 'Core' 'Tests' ) ]
 ]
 
