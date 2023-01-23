@@ -18,8 +18,9 @@ BaselineOfOpenWeanterMap >> baseline: spec [
 			package: #'OpenWeatherMap-Tests'
 			with: [ spec requires: #( 'OpenWeatherMap' ) ].
 		spec
-			group: 'default'
-			with: #( 'OpenWeatherMap' 'OpenWeatherMap-Tests' ) ]
+			group: 'Core' with: #( 'OpenWeatherMap' );
+			group: 'Tests	' with: #( 'OpenWeatherMap-Tests' );
+			group: 'default' with: #( 'Core' 'Tests' ) ]
 ]
 
 { #category : #accessing }
