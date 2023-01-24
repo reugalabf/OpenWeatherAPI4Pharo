@@ -32,7 +32,7 @@ OpenWeatherBulkAggregationTest >> setUp [
 { #category : #tests }
 OpenWeatherBulkAggregationTest >> testMappingAggregationCSV [
 
-	| csv |
+	| csv records |
 	self assert: bulkDataset size equals: 4.
 	aggregator
 		addTemperature;
@@ -40,9 +40,15 @@ OpenWeatherBulkAggregationTest >> testMappingAggregationCSV [
 		addSnow1h;
 		addWeatherDescription.
 	csv := aggregator aggregateCSV: bulkDataset.
-	csv inspect.
 
-	self assert: csv notEmpty
+
+	self assert: csv notEmpty.
+	records := (NeoCSVReader on: csv readStream) upToEnd.
+	self assert: records size equals: 2.
+	self
+		assert: (records at: 1)
+		equals:
+		#( 'key' 'rain1h' 'snow1h' 'weatherDescription' 'temperature' )
 ]
 
 { #category : #tests }
@@ -52,9 +58,9 @@ OpenWeatherBulkAggregationTest >> testRainMappingAggregation [
 	self assert: bulkDataset size equals: 4.
 	aggregator addRain1h.
 	agg := aggregator aggregate: bulkDataset.
-	agg inspect.
-	bulkDataset inspect.
-	self assert: agg notEmpty
+
+	self assert: agg notEmpty.
+	self assert: agg value first value keys first equals: 'rain1h'
 ]
 
 { #category : #tests }
@@ -64,9 +70,8 @@ OpenWeatherBulkAggregationTest >> testSnowMappingAggregation [
 	self assert: bulkDataset size equals: 4.
 	aggregator addSnow1h.
 	agg := aggregator aggregate: bulkDataset.
-	agg inspect.
-	"bulkDataset inspect."
-	self assert: agg notEmpty
+	self assert: agg notEmpty.
+	self assert: agg value first value keys first equals: 'snow1h'
 ]
 
 { #category : #tests }
@@ -77,9 +82,10 @@ OpenWeatherBulkAggregationTest >> testSnowRainMappingAggregation [
 	aggregator addSnow1h.
 	aggregator addRain1h.
 	agg := aggregator aggregate: bulkDataset.
-	agg inspect.
-	"bulkDataset inspect."
-	self assert: agg notEmpty
+	
+	self assert: agg notEmpty.
+	self assert: agg value first value keys first equals: 'snow1h'.
+	self assert: agg value first value keys last equals: 'rain1h'
 ]
 
 { #category : #tests }
@@ -92,7 +98,10 @@ OpenWeatherBulkAggregationTest >> testTemperatureMappingAggregation [
 		addRain1h;
 		addSnow1h.
 	agg := aggregator aggregate: bulkDataset.
-	agg inspect.
-	bulkDataset inspect.
-	self assert: agg notEmpty
+	
+	self assert: agg notEmpty.
+	self assert: (agg value first value keys includes: 'temperature').
+
+	self assert: (agg value first value keys includes: 'rain1h').
+	self assert: (agg value first value keys includes: 'snow1h')
 ]
