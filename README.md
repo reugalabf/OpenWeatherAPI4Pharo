@@ -4,6 +4,15 @@ This is a client for the some of the API published by OpenWeatherMap such as:One
 
 Please visit https://openweathermap.org/ to learn more about the available APIs and to get a valid key. The key is required to call the API. 
 
+## Installation
+
+```
+Metacello new
+  repository: 'github://reugalabf/OpenWeatherAPI4Pharo:main';
+  baseline: 'OpenWeatherMap';
+  load.
+```
+
 ## Example
 
 ``` |client|
