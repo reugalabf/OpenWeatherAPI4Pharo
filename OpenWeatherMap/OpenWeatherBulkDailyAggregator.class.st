@@ -70,6 +70,12 @@ OpenWeatherBulkDailyAggregator >> aggregate: bulkCollection [
 	^ result
 ]
 
+{ #category : #api }
+OpenWeatherBulkDailyAggregator >> aggregate: bulkCollection do: aBlock [
+
+	(self aggregate: bulkCollection) do: aBlock
+]
+
 { #category : #'api - export' }
 OpenWeatherBulkDailyAggregator >> aggregateCSV: bulkCollection [
 
