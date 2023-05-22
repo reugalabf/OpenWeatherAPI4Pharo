@@ -73,7 +73,7 @@ OpenWeatherBulkAggregationTest >> testRainMappingAggregation [
 	self assert: bulkDataset size equals: 4.
 	aggregator addRain1h.
 	agg := aggregator aggregate: bulkDataset.
-
+	agg inspect.
 	self assert: agg notEmpty.
 	self assert: agg value first value keys first equals: 'rain1h'
 ]
