@@ -45,6 +45,21 @@ self assert: (result round:2) equals: 0.6
 ]
 
 { #category : #tests }
+OpenWeatherBulkAggregationTest >> testAggregationDoTest [
+
+	| agg result|
+   result := 0.
+	self assert: bulkDataset size equals: 4.
+	aggregator addRain1h.
+	aggregator aggregate: bulkDataset do:[:each| result := result + (each value at:#rain1h )].
+
+"	self assert: agg notEmpty.
+	self assert: agg value first value keys first equals: 'rain1h'
+"	
+self assert: (result round:2) equals: 0.6 
+]
+
+{ #category : #tests }
 OpenWeatherBulkAggregationTest >> testMappingAggregationCSV [
 
 	| csv records |

@@ -14,6 +14,14 @@ client oneCallFor: ((Dictionary new)
 							at:#units put: 'metric';
 							at:#exclude put:'minutely,hourly';
 							yourself  )).							
+
+(client directGeocodingWith: ((Dictionary new) 
+							at:#q put: 'La Plata, Buenos Aires, AR'; 
+							yourself  )).												
+(client directGeocodingWith: ((Dictionary new) 
+							at:#q put: 'La Plata, AR'; 
+							yourself  )).												
+
 "
 Class {
 	#name : #OpenWeatherMapClient,
@@ -78,6 +86,33 @@ OpenWeatherMapClient >> currentWeatherFor: paramsDict [
 	rsp := ZnEasy get: (self currentWeatherCallWith: paramsDict).
 	rsp isError ifTrue: [ ^ self error: 'Error fetching Current Weather' ].
 	^(NeoJSONReader on: rsp entity readStream) nextAs: CurrentWeather
+]
+
+{ #category : #api }
+OpenWeatherMapClient >> directGeocodingFor: paramsDict [
+
+	| rsp |
+	rsp := ZnEasy get: (self directGeocodingWith: paramsDict).
+	rsp isError ifTrue: [ 
+		^ self error: 'Error fetching One Call Weather Report' ].
+	^ (NeoJSONReader on: rsp entity readStream) nextListAs: DirectGeocoding 
+]
+
+{ #category : #private }
+OpenWeatherMapClient >> directGeocodingWith: paramsDict [
+
+	"http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}"
+
+	"q ===> City name, state code (only for the US) and country code divided by comma. Please use ISO 3166 country codes."
+
+	(paramsDict includesKey: #q)
+		ifFalse: [ ^ self error: 'Missing required parameters' ]
+		ifTrue: [ 
+			^ self
+				  buildCallURL: 'https://api.openweathermap.org/geo/1.0/direct'
+				  with: (paramsDict
+						   at: #limit put: '5';
+						   yourself) ]
 ]
 
 { #category : #initialization }
