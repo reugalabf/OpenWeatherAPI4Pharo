@@ -8,30 +8,6 @@ Class {
 	#category : #'OpenWeatherMap-Client'
 }
 
-{ #category : #'instance creation' }
-OpenWeatherBulkDailyAggregator class >> forRain: bulkCollection [
-
-	^ self new aggregateRain: bulkCollection
-]
-
-{ #category : #'instance creation' }
-OpenWeatherBulkDailyAggregator class >> forRainCSV: bulkCollection [
-
-	^ self new aggregateRainCSV: bulkCollection
-]
-
-{ #category : #'instance creation' }
-OpenWeatherBulkDailyAggregator class >> forSnow: bulkCollection [
-
-	^ self new aggregateSnow: bulkCollection
-]
-
-{ #category : #'instance creation' }
-OpenWeatherBulkDailyAggregator class >> forSnowCSV: bulkCollection [
-
-	^ self new aggregateSnowCSV: bulkCollection
-]
-
 { #category : #api }
 OpenWeatherBulkDailyAggregator >> addRain1h [
 
