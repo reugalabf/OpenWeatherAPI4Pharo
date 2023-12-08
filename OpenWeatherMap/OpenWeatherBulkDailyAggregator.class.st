@@ -9,6 +9,18 @@ Class {
 }
 
 { #category : #api }
+OpenWeatherBulkDailyAggregator >> addAverageTemperature [
+
+	mappings at: #temperature put: self averageAggregationBlock
+]
+
+{ #category : #api }
+OpenWeatherBulkDailyAggregator >> addMaxTemperature [
+
+	mappings at: #temperature put: self maxAggregationBlock
+]
+
+{ #category : #api }
 OpenWeatherBulkDailyAggregator >> addRain1h [
 
 	mappings at: #rain1h put: self sumAggregationBlock 
@@ -18,12 +30,6 @@ OpenWeatherBulkDailyAggregator >> addRain1h [
 OpenWeatherBulkDailyAggregator >> addSnow1h [
 
 	mappings at: #snow1h put: self sumAggregationBlock
-]
-
-{ #category : #api }
-OpenWeatherBulkDailyAggregator >> addTemperature [
-
-	mappings at: #temperature put: self averageAggregationBlock
 ]
 
 { #category : #api }
@@ -152,6 +158,30 @@ OpenWeatherBulkDailyAggregator >> initialize [
 	aggregation := Dictionary new.
 	mappings := Dictionary new
 
+]
+
+{ #category : #private }
+OpenWeatherBulkDailyAggregator >> maxAggregationBlock [
+^[ :bulk :outReg :key | 
+		| value |
+		value := bulk perform: key.
+		outReg
+			at: key
+			ifPresent: [ :v | outReg at: key put: (value max: v) ]
+			ifAbsent: [ outReg at: key put: value ].
+		outReg ]
+]
+
+{ #category : #private }
+OpenWeatherBulkDailyAggregator >> minAggregationBlock [
+^[ :bulk :outReg :key | 
+		| value |
+		value := bulk perform: key.
+		outReg
+			at: key
+			ifPresent: [ :v | outReg at: key put: (value min: v) ]
+			ifAbsent: [ outReg at: key put: value ].
+		outReg ]
 ]
 
 { #category : #private }

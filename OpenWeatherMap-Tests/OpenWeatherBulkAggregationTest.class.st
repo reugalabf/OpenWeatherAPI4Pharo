@@ -65,7 +65,7 @@ OpenWeatherBulkAggregationTest >> testMappingAggregationCSV [
 	| csv records |
 	self assert: bulkDataset size equals: 4.
 	aggregator
-		addTemperature;
+		addAverageTemperature;
 		addRain1h;
 		addSnow1h;
 		addWeatherDescription.
@@ -79,6 +79,25 @@ OpenWeatherBulkAggregationTest >> testMappingAggregationCSV [
 		assert: (records at: 1)
 		equals:
 		#( 'key' 'rain1h' 'snow1h' 'weatherDescription' 'temperature' )
+]
+
+{ #category : #tests }
+OpenWeatherBulkAggregationTest >> testMaxTemperatureMappingAggregation [
+
+	| agg |
+	self assert: bulkDataset size equals: 4.
+	aggregator
+		addMaxTemperature;
+		addRain1h;
+		addSnow1h.
+	agg := aggregator aggregate: bulkDataset.
+
+	self assert: agg notEmpty.
+	self assert: (agg value first value keys includes: 'temperature').
+	self assert: (agg value first value at: 'temperature') equals: 2.07.
+
+	self assert: (agg value first value keys includes: 'rain1h').
+	self assert: (agg value first value keys includes: 'snow1h')
 ]
 
 { #category : #tests }
@@ -124,7 +143,7 @@ OpenWeatherBulkAggregationTest >> testTemperatureMappingAggregation [
 	| agg |
 	self assert: bulkDataset size equals: 4.
 	aggregator
-		addTemperature;
+		addAverageTemperature;
 		addRain1h;
 		addSnow1h.
 	agg := aggregator aggregate: bulkDataset.
