@@ -16,7 +16,7 @@ OpenWeatherHistoryFlatBulkTest >> testCSVOneRecord [
 
 	| converter string |
 	converter := CSV2JSONStream source: self csvOneRecord readStream.
-	string := converter nextAs: nil.
+	string := converter next.
 	self should: [ string notNil ]
 ]
 
@@ -24,8 +24,8 @@ OpenWeatherHistoryFlatBulkTest >> testCSVOneRecord [
 OpenWeatherHistoryFlatBulkTest >> testCSVOneRecordAsDictionary [
 
 	| converter dictionary |
-	converter := CSV2JSONStream source: self csvOneRecord readStream.
-	dictionary := converter nextAs: nil.
+	converter := CSV2DictionaryStream   source: self csvOneRecord readStream.
+	dictionary := converter next.
 	self should: [ dictionary keys size = 28 ]
 ]
 
@@ -33,8 +33,10 @@ OpenWeatherHistoryFlatBulkTest >> testCSVOneRecordAsDictionary [
 OpenWeatherHistoryFlatBulkTest >> testCSVOneRecordAsHistoryFlatBulk [
 
 	| converter bulkEntry |
-	converter := CSV2JSONStream source: self csvOneRecord readStream.
-	bulkEntry := converter nextAs: HistoryFlatBulk.
+	converter := CSV2JSONSchemaStream source:
+		             self csvOneRecord readStream.
+	converter schema: HistoryFlatBulk.
+	bulkEntry := converter next.
 	self should: [ 
 		bulkEntry dateAndTime
 		= (DateAndTime fromString: '2023-05-23 00:00:00 +0000 UTC') ]
