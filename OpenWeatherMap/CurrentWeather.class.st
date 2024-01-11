@@ -48,9 +48,7 @@ cod Internal parameter
 "
 Class {
 	#name : #CurrentWeather,
-	#superclass : #Object,
-	#traits : 'DataTimeConversor',
-	#classTraits : 'DataTimeConversor classTrait',
+	#superclass : #OpenWeatherDatedEntity,
 	#instVars : [
 		'coord',
 		'weather',
@@ -60,9 +58,7 @@ Class {
 		'clouds',
 		'rain',
 		'snow',
-		'dt',
 		'sys',
-		'timezone',
 		'id',
 		'name'
 	],
@@ -76,10 +72,4 @@ CurrentWeather class >> neoJsonMapping: mapper [
 		mapping mapInstVars:
 			#( coord weather main visibility wind clouds rain snow dt sys timezone
 			   id name ) ]
-]
-
-{ #category : #accessing }
-CurrentWeather >> dt [
-
-	^ dt
 ]

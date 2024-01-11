@@ -27,11 +27,8 @@ current.weather.icon Weather icon id. How to get icons
 "
 Class {
 	#name : #OneCallCurrent,
-	#superclass : #Object,
-	#traits : 'DataTimeConversor',
-	#classTraits : 'DataTimeConversor classTrait',
+	#superclass : #OpenWeatherDatedEntity,
 	#instVars : [
-		'dt',
 		'sunrise',
 		'sunset',
 		'temp',
@@ -58,8 +55,14 @@ OneCallCurrent class >> neoJsonMapping: mapper [
 	mapper for: self do: [ :mapping | mapping mapAllInstVars ]
 ]
 
-{ #category : #accessing }
-OneCallCurrent >> dt [
+{ #category : #enumerating }
+OneCallCurrent >> dt_iso [
 
-	^ dt
+	^ self subclassResponsibility
+]
+
+{ #category : #enumerating }
+OneCallCurrent >> timezone [
+
+	^ self subclassResponsibility
 ]

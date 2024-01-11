@@ -27,11 +27,8 @@ hourly.weather.icon Weather icon id. How to get icons
 "
 Class {
 	#name : #OneCallHourlyForecast,
-	#superclass : #Object,
-	#traits : 'DataTimeConversor',
-	#classTraits : 'DataTimeConversor classTrait',
+	#superclass : #OpenWeatherDatedEntity,
 	#instVars : [
-		'dt',
 		'sunrise',
 		'sunset',
 		'temp',
@@ -58,8 +55,14 @@ OneCallHourlyForecast class >> neoJsonMapping: mapper [
 	mapper for: self do: [ :mapping | mapping mapAllInstVars ]
 ]
 
-{ #category : #accessing }
-OneCallHourlyForecast >> dt [
+{ #category : #enumerating }
+OneCallHourlyForecast >> dt_iso [
 
-	^ dt
+	^ self subclassResponsibility
+]
+
+{ #category : #enumerating }
+OneCallHourlyForecast >> timezone [
+
+	^ self subclassResponsibility
 ]

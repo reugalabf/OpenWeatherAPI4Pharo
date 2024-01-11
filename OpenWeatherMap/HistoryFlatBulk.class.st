@@ -1,8 +1,6 @@
 Class {
 	#name : #HistoryFlatBulk,
-	#superclass : #Object,
-	#traits : 'DataTimeConversor',
-	#classTraits : 'DataTimeConversor classTrait',
+	#superclass : #OpenWeatherDatedEntity,
 	#instVars : [
 		'lon',
 		'temp_max',
@@ -24,10 +22,8 @@ Class {
 		'city_name',
 		'wind_speed',
 		'weather_id',
-		'timezone',
 		'humidity',
 		'dt_iso',
-		'dt',
 		'clouds_all',
 		'weather_description',
 		'snow_1h',
@@ -76,12 +72,6 @@ HistoryFlatBulk >> dew_point [
 HistoryFlatBulk >> dew_point: anObject [
 
 	dew_point := anObject
-]
-
-{ #category : #accessing }
-HistoryFlatBulk >> dt [
-
-	^ dt
 ]
 
 { #category : #accessing }

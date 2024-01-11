@@ -47,9 +47,7 @@ timezone Shift in seconds from UTC
 "
 Class {
 	#name : #HistoryBulk,
-	#superclass : #Object,
-	#traits : 'DataTimeConversor',
-	#classTraits : 'DataTimeConversor classTrait',
+	#superclass : #OpenWeatherDatedEntity,
 	#instVars : [
 		'city_name',
 		'lat',
@@ -61,9 +59,7 @@ Class {
 		'snow',
 		'weather',
 		'visibility',
-		'dt',
-		'dt_iso',
-		'timezone'
+		'dt_iso'
 	],
 	#category : #'OpenWeatherMap-Entities'
 }
@@ -72,12 +68,6 @@ Class {
 HistoryBulk class >> neoJsonMapping: mapper [
 
 	mapper for: self do: [ :mapping | mapping mapAllInstVars ]
-]
-
-{ #category : #accessing }
-HistoryBulk >> dt [
-
-	^ dt
 ]
 
 { #category : #accessing }
@@ -114,6 +104,12 @@ HistoryBulk >> snow1h [
 HistoryBulk >> temperature [
 
 	^ main at: #temp
+]
+
+{ #category : #enumerating }
+HistoryBulk >> timezone [
+
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
