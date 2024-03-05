@@ -54,15 +54,3 @@ OneCallHourlyForecast class >> neoJsonMapping: mapper [
 
 	mapper for: self do: [ :mapping | mapping mapAllInstVars ]
 ]
-
-{ #category : #enumerating }
-OneCallHourlyForecast >> dt_iso [
-
-	^ self subclassResponsibility
-]
-
-{ #category : #enumerating }
-OneCallHourlyForecast >> timezone [
-
-	^ self subclassResponsibility
-]

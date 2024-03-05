@@ -16,6 +16,7 @@ OpenWeatherHistoryFlatBulkTest >> testCSVOneRecord [
 
 	| converter string |
 	converter := CSV2JSONStream source: self csvOneRecord readStream.
+	converter filteredHeaders: #('dt_iso' 'timezone' 'temp' 'humidity').
 	string := converter next.
 	self should: [ string notNil ]
 ]
@@ -25,8 +26,9 @@ OpenWeatherHistoryFlatBulkTest >> testCSVOneRecordAsDictionary [
 
 	| converter dictionary |
 	converter := CSV2DictionaryStream   source: self csvOneRecord readStream.
+	converter filteredHeaders: #('dt_iso' 'timezone' 'temp' 'humidity').
 	dictionary := converter next.
-	self should: [ dictionary keys size = 28 ]
+	self should: [ dictionary keys size = 4 ]
 ]
 
 { #category : #tests }
@@ -35,7 +37,8 @@ OpenWeatherHistoryFlatBulkTest >> testCSVOneRecordAsHistoryFlatBulk [
 	| converter bulkEntry |
 	converter := CSV2JSONSchemaStream source:
 		             self csvOneRecord readStream.
-	converter schema: HistoryFlatBulk.
+	converter schema: HistoryFlatBulk;
+	filteredHeaders: #('dt_iso' 'timezone' 'temp' 'humidity').
 	bulkEntry := converter next.
 	self should: [ 
 		bulkEntry dateAndTime

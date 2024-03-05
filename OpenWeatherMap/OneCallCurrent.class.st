@@ -54,15 +54,3 @@ OneCallCurrent class >> neoJsonMapping: mapper [
 
 	mapper for: self do: [ :mapping | mapping mapAllInstVars ]
 ]
-
-{ #category : #enumerating }
-OneCallCurrent >> dt_iso [
-
-	^ self subclassResponsibility
-]
-
-{ #category : #enumerating }
-OneCallCurrent >> timezone [
-
-	^ self subclassResponsibility
-]

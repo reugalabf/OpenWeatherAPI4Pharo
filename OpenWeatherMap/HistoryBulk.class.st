@@ -41,7 +41,7 @@ weather.description Weather condition within the group
 weather.icon Weather icon id
 visibility Average visibility, metres. The maximum value of the visibility is 10km
 dt Time of data calculation, unix, UTC
-dt_isoDate and time in UTC format
+dt_iso Date and time in UTC format
 timezone Shift in seconds from UTC
 
 "
@@ -58,8 +58,7 @@ Class {
 		'rain',
 		'snow',
 		'weather',
-		'visibility',
-		'dt_iso'
+		'visibility'
 	],
 	#category : #'OpenWeatherMap-Entities'
 }
@@ -68,12 +67,6 @@ Class {
 HistoryBulk class >> neoJsonMapping: mapper [
 
 	mapper for: self do: [ :mapping | mapping mapAllInstVars ]
-]
-
-{ #category : #accessing }
-HistoryBulk >> dt_iso [
-
-	^ dt_iso
 ]
 
 { #category : #accessing }
@@ -104,12 +97,6 @@ HistoryBulk >> snow1h [
 HistoryBulk >> temperature [
 
 	^ main at: #temp
-]
-
-{ #category : #enumerating }
-HistoryBulk >> timezone [
-
-	^ self subclassResponsibility
 ]
 
 { #category : #accessing }

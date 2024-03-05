@@ -12,5 +12,5 @@ DataTimeConversor >> date [
 { #category : #enumerating }
 DataTimeConversor >> dateAndTime [
 
-	^ (DateAndTime fromString: self dt_iso)offset: self timezone  
+	^ (DateAndTime fromString: self dt_iso) offset: self timezone
 ]

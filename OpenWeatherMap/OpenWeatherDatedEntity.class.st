@@ -5,10 +5,20 @@ Class {
 	#classTraits : 'DataTimeConversor classTrait',
 	#instVars : [
 		'dt',
-		'timezone'
+		'timezone',
+		'dt_iso'
 	],
 	#category : #'OpenWeatherMap-Entities'
 }
+
+{ #category : #enumerating }
+OpenWeatherDatedEntity >> dateAndTime [
+
+	"
+	^ (DateAndTime fromString: self dt_iso) offset: self timezone"
+
+	^ self dt_iso offset: self timezone
+]
 
 { #category : #accessing }
 OpenWeatherDatedEntity >> dt [
@@ -19,11 +29,22 @@ OpenWeatherDatedEntity >> dt [
 { #category : #accessing }
 OpenWeatherDatedEntity >> dt_iso [
 
-	^ (DateAndTime fromUnixTime: self dt) printString
+	^ dt_iso
+		  ifNil: [ (DateAndTime fromUnixTime: self dt) printString ]
+		  ifNotNil: [ DateAndTime fromString: dt_iso ]
+]
+
+{ #category : #accessing }
+OpenWeatherDatedEntity >> initialize [
+
+	timezone := 0.
+	^self
 ]
 
 { #category : #accessing }
 OpenWeatherDatedEntity >> timezone [
 
-	^ timezone ifNil: [ timezone := 0 ] ifNotNil: [ timezone ]
+	^ timezone isNumber
+		  ifFalse: [ timezone := Integer readFromString: timezone ]
+		  ifTrue: [ timezone ]
 ]

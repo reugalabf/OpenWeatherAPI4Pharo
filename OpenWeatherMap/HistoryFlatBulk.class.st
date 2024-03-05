@@ -23,7 +23,6 @@ Class {
 		'wind_speed',
 		'weather_id',
 		'humidity',
-		'dt_iso',
 		'clouds_all',
 		'weather_description',
 		'snow_1h',
@@ -78,12 +77,6 @@ HistoryFlatBulk >> dew_point: anObject [
 HistoryFlatBulk >> dt: anObject [
 
 	dt := anObject
-]
-
-{ #category : #accessing }
-HistoryFlatBulk >> dt_iso [
-
-	^ dt_iso
 ]
 
 { #category : #accessing }
@@ -258,12 +251,6 @@ HistoryFlatBulk >> temp_min [
 HistoryFlatBulk >> temp_min: anObject [
 
 	temp_min := anObject
-]
-
-{ #category : #accessing }
-HistoryFlatBulk >> timezone [
-
-	^ timezone
 ]
 
 { #category : #accessing }
