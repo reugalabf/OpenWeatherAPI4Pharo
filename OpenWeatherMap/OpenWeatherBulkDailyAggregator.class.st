@@ -35,7 +35,7 @@ OpenWeatherBulkDailyAggregator >> addSnow1h [
 { #category : #api }
 OpenWeatherBulkDailyAggregator >> addWeatherDescription [
 
-	mappings at: #weatherDescription put: self collateAggregationBlock 
+	mappings at: #weatherDescription put: self appendAggregationBlock 
 ]
 
 { #category : #api }
@@ -83,6 +83,19 @@ OpenWeatherBulkDailyAggregator >> aggregateCSV: bulkCollection on: fileRef [
 ]
 
 { #category : #private }
+OpenWeatherBulkDailyAggregator >> appendAggregationBlock [
+
+	^ [ :bulk :outReg :key | 
+	  | value |
+	  value := bulk perform: key.
+	  outReg
+		  at: key
+		  ifPresent: [ :v | outReg at: key put: v , ' ' , value ]
+		  ifAbsent: [ outReg at: key put: value ].
+	  outReg ]
+]
+
+{ #category : #private }
 OpenWeatherBulkDailyAggregator >> applyMappingsTo: row key: key [
 
 	| result |
@@ -115,19 +128,6 @@ OpenWeatherBulkDailyAggregator >> averageAggregationBlock [
 			  outReg at: key put: { 
 					  value.
 					  1 } ].
-	  outReg ]
-]
-
-{ #category : #private }
-OpenWeatherBulkDailyAggregator >> collateAggregationBlock [
-
-	^ [ :bulk :outReg :key | 
-	  | value |
-	  value := bulk perform: key.
-	  outReg
-		  at: key
-		  ifPresent: [ :v | outReg at: key put: v , ' ' , value ]
-		  ifAbsent: [ outReg at: key put: value ].
 	  outReg ]
 ]
 

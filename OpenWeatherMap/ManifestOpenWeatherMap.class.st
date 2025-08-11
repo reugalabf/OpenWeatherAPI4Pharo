@@ -9,5 +9,5 @@ Class {
 
 { #category : #'code-critics' }
 ManifestOpenWeatherMap class >> ruleBadMessageRule2V1FalsePositive [
-	^ #(#(#(#RGMethodDefinition #(#OpenWeatherBulkDailyAggregator #sumAggregationBlock #false)) #'2023-01-20T16:30:42.119467-03:00') #(#(#RGMethodDefinition #(#OpenWeatherBulkDailyAggregator #averageAggregationBlock #false)) #'2023-01-20T16:31:23.74512-03:00') #(#(#RGMethodDefinition #(#OpenWeatherBulkDailyAggregator #collateAggregationBlock #false)) #'2023-01-20T16:32:09.687527-03:00') )
+	^ #(#(#(#RGMethodDefinition #(#OpenWeatherBulkDailyAggregator #sumAggregationBlock #false)) #'2023-01-20T16:30:42.119467-03:00') #(#(#RGMethodDefinition #(#OpenWeatherBulkDailyAggregator #averageAggregationBlock #false)) #'2023-01-20T16:31:23.74512-03:00') #(#(#RGMethodDefinition #(#OpenWeatherBulkDailyAggregator #appendAggregationBlock #false)) #'2023-01-20T16:32:09.687527-03:00') )
 ]
